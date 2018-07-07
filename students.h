@@ -33,15 +33,15 @@ public:
 };
 
 class Student : virtual public Person{
-    string major;
+    string majorDegree;
     int year;
 public:
-    Student(Person p, string degreeTitle, int inputYear) : Person(p), major(degreeTitle), year(inputYear) {};
-    Student(Student& s) : Person(s), major(s.major), year(s.year){};
+    Student(Person p, string degreeTitle, int inputYear) : Person(p), majorDegree(degreeTitle), year(inputYear) {};
+    Student(Student& s) : Person(s), majorDegree(s.majorDegree), year(s.year){};
 
     virtual void output(ostream& out) {
         Person::output(out);
-        out << "," << major;
+        out << "," << majorDegree;
         out << "," << year;
     }
 };
