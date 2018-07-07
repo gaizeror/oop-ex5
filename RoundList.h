@@ -43,8 +43,8 @@ public:
         T& operator*(){ return p->getData(); }
         friend class RoundList;
 
-        int operator!=(Iterator& other){
-            return this->p != other;
+        int operator!=(const Iterator other) const{
+            return this->p != other.p;
         }
     };
 
@@ -75,6 +75,7 @@ public:
         }
         tmpIterator.p->setNext(it.p->getNext());
         delete(it.p);
+        size--;
         return tmpIterator;
 
 
@@ -82,16 +83,12 @@ public:
 
     template<class func>
     void forEach(const func& f){
-        Iterator tmp = this->begin();
-        if(tmp.p)
-        {
-            f(tmp.p->getData());
-            tmp++;
-            while(tmp.p != this->begin().p)
-            {
-                f(tmp.p->getData());
-                tmp++;
-            }
+        Iterator start = begin();
+        Iterator tmp = begin();
+        f(*tmp);
+        tmp++;
+        for (; tmp != start; tmp++) {
+            f(*tmp);
         }
     }
 
